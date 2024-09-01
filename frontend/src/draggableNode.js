@@ -1,33 +1,27 @@
 // draggableNode.js
 
-export const DraggableNode = ({ type, label }) => {
-    const onDragStart = (event, nodeType) => {
-      const appData = { nodeType }
-      event.target.style.cursor = 'grabbing';
-      event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
-      event.dataTransfer.effectAllowed = 'move';
-    };
-  
-    return (
-      <div
-        className={type}
-        onDragStart={(event) => onDragStart(event, type)}
-        onDragEnd={(event) => (event.target.style.cursor = 'grab')}
-        style={{ 
-          cursor: 'grab', 
-          minWidth: '80px', 
-          height: '60px',
-          display: 'flex', 
-          alignItems: 'center', 
-          borderRadius: '8px',
-          backgroundColor: '#1C2536',
-          justifyContent: 'center', 
-          flexDirection: 'column'
-        }} 
-        draggable
-      >
-          <span style={{ color: '#fff' }}>{label}</span>
-      </div>
+import React, { createElement } from "react";
+
+export const DraggableNode = ({ data }) => {
+  const onDragStart = (event, nodeType) => {
+    const appData = { nodeType };
+    event.target.style.cursor = "grabbing";
+    event.dataTransfer.setData(
+      "application/reactflow",
+      JSON.stringify(appData)
     );
+    event.dataTransfer.effectAllowed = "move";
   };
-  
+
+  return (
+    <div
+      onDragStart={(event) => onDragStart(event, data?.type)}
+      onDragEnd={(event) => (event.target.style.cursor = "grab")}
+      className="flex flex-col justify-center items-center gap-2 border p-4 rounded-lg min-w-20 h-20 select-none cursor-pointer text-sm"
+      draggable
+    >
+      {createElement(data?.icon)}
+      <span style={{}}>{data?.label}</span>
+    </div>
+  );
+};
