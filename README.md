@@ -1,8 +1,6 @@
 
 ## { React Flow + Zustand }
 
-## Video Demo -------------------
-
 <br />
 </br>
 
